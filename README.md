@@ -12,11 +12,11 @@ More to come!
 
 ## Install
 ### LocalAdmin Install:
-To install the plugin via LocalAdmin, boot up your server and type ```p install omgiamhungarian/SimpleUtilities```
+To install the plugin via LocalAdmin, boot up your server and type ```p install omgiamhungarian/SimpleUtilities```.
 
 ### Manual Install:
 1. Download the latest released SimpleUtilities.dll from [releases](https://github.com/omgiamhungarian/SimpleUtilities/releases/).
-2. Move the SimpleUtilities.dll to ```PluginAPI/plugins/(server_port)```
+2. Move the SimpleUtilities.dll to ```PluginAPI/plugins/(server_port)```.
 3. You are done. Restart your server.
 
 ## Default Configuration file
