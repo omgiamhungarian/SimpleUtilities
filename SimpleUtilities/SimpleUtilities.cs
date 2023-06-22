@@ -1,6 +1,7 @@
 ﻿using PluginAPI.Enums;
 using PluginAPI.Events;
 using PluginAPI.Core.Attributes;
+using HarmonyLib;
 
 namespace SimpleUtilities
 {
@@ -12,18 +13,20 @@ namespace SimpleUtilities
         public Config Config;
 
         [PluginPriority(LoadPriority.Highest)]
-        [PluginEntryPoint("SimpleUtilities", "1.0.0", "Provides simple features for your server.", "omgiamhungarian")]
-        
+        [PluginEntryPoint("SimpleUtilities", "1.1.0", "Provides simple features for your server.", "omgiamhungarian")]
+
         public void LoadPlugin()
         {
             if (!Config.IsEnabled)
             {
                 return;
             }
-            
+
             Singleton = this;
             EventManager.RegisterEvents(this);
             EventManager.RegisterEvents<EventHandlers>(this);
+            Harmony harmony = new Harmony("com.omgiamhungarian.simpleutilities");
+            harmony.PatchAll();
         }
     }
 }

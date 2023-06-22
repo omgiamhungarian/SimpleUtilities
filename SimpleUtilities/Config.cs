@@ -31,7 +31,19 @@ namespace SimpleUtilities
         [Description("Whether or not to enable friendly fire when the round ends. (You can change the friendly_fire_multiplier in your config_gameplay.txt)")]
         public bool FFOnEnd { get; set; } = true;
 
-        [Description("Whether or not cuffed NTF / CI should change teams.")]
+        [Description("Whether or not disarmed NTF / CI should change teams when escaping.")]
         public bool CuffedChangeTeams { get; set; } = true;
+
+        [Description("Message sent for the player who looked at / shot SCP-096. (Leave it empty to disable.)")]
+        public string TargetMessage { get; set; } = "you became a target for scp-096!";
+
+        [Description("Message sent when coin lands on tails.")]
+        public string CoinTails { get; set; } = "the coin landed on tails!";
+
+        [Description("Message sent when coin lands on heads.")]
+        public string CoinHeads { get; set; } = "the coin landed on heads!";
+
+        [Description("Whether or not to show players' HP when looking at them.")]
+        public bool ShowHp { get; set; } = true;
     }
 }

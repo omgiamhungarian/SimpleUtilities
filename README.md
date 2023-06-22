@@ -7,17 +7,21 @@
 - Chaos Insurgency spawn on round start instead of Facility Guards,
 - Auto Friendly Fire when the round ends,
 - Cuffed Nine-Tailed Fox / Chaos Insurgency changes team upon "escape".
+- Hint displayed after looking at / shooting SCP-096.
+- Hint displayed when flipping a coin.
+- Displays HP of the player you are looking at.
 
 More to come!
 
 ## Install
 ### LocalAdmin Install:
-To install the plugin via LocalAdmin, boot up your server and type ```p install omgiamhungarian/SimpleUtilities```.
+To install the plugin via LocalAdmin, boot up your server and type ```p install omgiamhungarian/SimpleUtilities```. (Make sure 0Harmony.dll is in PluginAPI/plugins/(server_port)/dependencies after installing.)
 
 ### Manual Install:
-1. Download the latest released SimpleUtilities.dll from [releases](https://github.com/omgiamhungarian/SimpleUtilities/releases/).
+1. Download the latest released SimpleUtilities.dll and dependencies.zip from [releases](https://github.com/omgiamhungarian/SimpleUtilities/releases/).
 2. Move the SimpleUtilities.dll to ```PluginAPI/plugins/(server_port)```.
-3. You are done. Restart your server.
+3. Move the 0Harmony.dll from dependencies.zip to PluginAPI/plugins/(server_port)/dependencies.
+4. You are done. Restart your server.
 
 ## Default Configuration file
 
@@ -40,6 +44,14 @@ cassie_text: true
 chaos_chance: 25
 # Whether or not to enable friendly fire when the round ends. (You can change the friendly_fire_multiplier in your config_gameplay.txt)
 f_f_on_end: true
-# Whether or not cuffed NTF / CI should change teams.
+# Whether or not disarmed NTF / CI should change teams when escaping.
 cuffed_change_teams: true
+# Message sent for the player who looked at / shot SCP-096. (Leave it empty to disable.)
+target_message: you became a target for scp-096!
+# Message sent when coin lands on tails.
+coin_tails: the coin landed on tails!
+# Message sent when coin lands on heads.
+coin_heads: the coin landed on heads!
+# Whether or not to show players' HP when looking at them.
+show_hp: true
 ```

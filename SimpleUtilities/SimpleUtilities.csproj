@@ -32,26 +32,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\dnSpy\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\szerver\SCPSL_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\dlls\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\..\..\..\szerver\SCPSL_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>..\..\..\..\..\szerver\SCPSL_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-Publicized">
-      <HintPath>..\..\..\dnSpy\Assembly-CSharp-Publicized.dll</HintPath>
+      <HintPath>..\..\..\..\dnSpy\Assembly-CSharp-Publicized.dll</HintPath>
     </Reference>
     <Reference Include="CommandSystem.Core">
-      <HintPath>..\..\..\..\szerver\SCPSL_Data\Managed\CommandSystem.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\szerver\SCPSL_Data\Managed\CommandSystem.Core.dll</HintPath>
     </Reference>
     <Reference Include="Mirror">
-      <HintPath>..\..\..\..\szerver\SCPSL_Data\Managed\Mirror.dll</HintPath>
+      <HintPath>..\..\..\..\..\szerver\SCPSL_Data\Managed\Mirror.dll</HintPath>
     </Reference>
     <Reference Include="PluginAPI">
-      <HintPath>..\..\..\PluginAPI.12.0.0\PluginAPI.dll</HintPath>
+      <HintPath>..\..\..\..\..\szerver\SCPSL_Data\Managed\PluginAPI.dll</HintPath>
     </Reference>
     <Reference Include="Pooling">
-      <HintPath>..\..\..\..\szerver\SCPSL_Data\Managed\Pooling.dll</HintPath>
+      <HintPath>..\..\..\..\..\szerver\SCPSL_Data\Managed\Pooling.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,7 +65,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\szerver\SCPSL_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\..\..\..\szerver\SCPSL_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
