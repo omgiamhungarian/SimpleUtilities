@@ -29,7 +29,7 @@ namespace SimpleUtilities
         public int ChaosChance { get; set; } = 25;
 
         [Description("Whether or not to enable friendly fire when the round ends. (You can change the friendly_fire_multiplier in your config_gameplay.txt)")]
-        public bool FfOnEnd { get; set; } = true;
+        public bool FFOnEnd { get; set; } = true;
 
         [Description("Whether or not disarmed NTF / CI should change teams when escaping.")]
         public bool CuffedChangeTeams { get; set; } = true;
