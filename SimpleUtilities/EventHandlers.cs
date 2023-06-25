@@ -10,11 +10,14 @@ using UnityEngine;
 using PlayerStatsSystem;
 using System;
 using HarmonyLib;
+using Random = UnityEngine.Random;
 
 namespace SimpleUtilities
 {
     public class EventHandlers
     {
+        int randomNumber;
+
         //Welcome message.
         [PluginEvent(ServerEventType.PlayerJoined)]
         public void OnPlayerJoin(Player player)
@@ -36,26 +39,29 @@ namespace SimpleUtilities
         }
 
         //Chaos Insurgency spawn on round start.
+
+        [PluginEvent(ServerEventType.WaitingForPlayers)]
+        void WaitingForPlayers()
+        {
+            randomNumber = Random.Range(1, 100);
+        }
+
         [PluginEvent(ServerEventType.PlayerChangeRole)]
         public void OnChangeRole(Player plr, PlayerRoleBase oldRole, RoleTypeId newRole, RoleChangeReason reason)
         {
-            Config config = SimpleUtilities.Singleton.Config;
-            int chance = config.ChaosChance;
-            System.Random random = new System.Random();
+            int chance = SimpleUtilities.Singleton.Config.ChaosChance;
 
-            if (random.Next(1, 100) > chance)
-            {
+            if (randomNumber > chance)
                 return;
-            }
-            Timing.CallDelayed(0.15f, () =>
+
+            if (reason != RoleChangeReason.RoundStart && reason != RoleChangeReason.LateJoin)
+                return;
+
+            Timing.CallDelayed(0.1f, () =>
             {
-                foreach (var plyr in Player.GetPlayers())
+                if (newRole == RoleTypeId.FacilityGuard)
                 {
-                    //This way you can still spawn Facility Guards from RA, if you need to.
-                    if (newRole == RoleTypeId.FacilityGuard && (reason == RoleChangeReason.RoundStart || reason == RoleChangeReason.LateJoin))
-                    {
-                        plyr.SetRole(RoleTypeId.ChaosRifleman);
-                    }
+                    plr.SetRole(RoleTypeId.ChaosRifleman);
                 }
             });
         }
@@ -64,7 +70,7 @@ namespace SimpleUtilities
         [PluginEvent(ServerEventType.RoundEnd)]
         void OnRoundEnded(RoundSummary.LeadingTeam leadingTeam)
         {
-            if (!SimpleUtilities.Singleton.Config.FFOnEnd)
+            if (!SimpleUtilities.Singleton.Config.FfOnEnd)
             {
                 return;
             }
@@ -113,7 +119,6 @@ namespace SimpleUtilities
                                 target.SetRole(RoleTypeId.NtfPrivate, RoleChangeReason.Escaped);
                                 yield break;
                             case Team.FoundationForces:
-                                ;
                                 target.SetRole(RoleTypeId.ChaosConscript, RoleChangeReason.Escaped);
                                 yield break;
                         }
@@ -162,7 +167,6 @@ namespace SimpleUtilities
 
             Timing.CallDelayed(0.1f, () =>
             {
-                int currentHP = (int)Math.Ceiling(plr.Health);
                 plr.CustomInfo = $"HP: {(int)Math.Ceiling(plr.Health)}/{(int)plr.MaxHealth}";
             });
         }
