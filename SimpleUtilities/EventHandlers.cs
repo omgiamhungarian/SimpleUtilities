@@ -173,21 +173,21 @@ namespace SimpleUtilities
         }
 
         [PluginEvent(ServerEventType.PlayerDamage)]
-        public void DamagedHealth(Player plr, Player attacker, DamageHandlerBase damageHandler)
+        public void DamagedHealth(Player plr, Player target, DamageHandlerBase damageHandler)
         {
             if (!SimpleUtilities.Singleton.Config.ShowHp)
             {
                 return;
             }
 
-            if (plr.Role == RoleTypeId.Spectator || plr.Role == RoleTypeId.None)
+            if (target.Role == RoleTypeId.Spectator || target.Role == RoleTypeId.None)
             {
                 return;
             }
 
             Timing.CallDelayed(0.5f, () =>
             {
-                plr.CustomInfo = $"HP: {(int)Math.Ceiling(plr.Health)}/{(int)plr.MaxHealth}";
+                target.CustomInfo = $"HP: {(int)Math.Ceiling(target.Health)}/{(int)target.MaxHealth}";
             });
         }
 

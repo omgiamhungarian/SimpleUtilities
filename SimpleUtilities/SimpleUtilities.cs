@@ -13,7 +13,7 @@ namespace SimpleUtilities
         public Config Config;
 
         [PluginPriority(LoadPriority.Highest)]
-        [PluginEntryPoint("SimpleUtilities", "1.1.0", "Provides simple features for your server.", "omgiamhungarian")]
+        [PluginEntryPoint("SimpleUtilities", "1.1.2", "Provides simple features for your server.", "omgiamhungarian")]
 
         public void LoadPlugin()
         {
