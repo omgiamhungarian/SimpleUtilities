@@ -10,7 +10,6 @@ using UnityEngine;
 using PlayerStatsSystem;
 using System;
 using HarmonyLib;
-using Log = PluginAPI.Core.Log;
 using Random = UnityEngine.Random;
 
 namespace SimpleUtilities
@@ -18,6 +17,7 @@ namespace SimpleUtilities
     public class EventHandlers
     {
         int randomNumber;
+        string hpFormat = SimpleUtilities.Singleton.Config.HpDisplayFormat;
 
         //Welcome message.
         [PluginEvent(ServerEventType.PlayerJoined)]
@@ -72,9 +72,7 @@ namespace SimpleUtilities
         void OnRoundEnded(RoundSummary.LeadingTeam leadingTeam)
         {
             if (!SimpleUtilities.Singleton.Config.FfOnEnd)
-            {
                 return;
-            }
 
             Server.FriendlyFire = true;
             float restartTime = ConfigFile.ServerConfig.GetFloat("auto_round_restart_time");
@@ -90,9 +88,7 @@ namespace SimpleUtilities
         public void OnPlayerHandcuffed(Player player, Player target)
         {
             if (!SimpleUtilities.Singleton.Config.CuffedChangeTeams)
-            {
                 return;
-            }
 
             Timing.RunCoroutine(CuffedChangeTeams());
 
@@ -143,11 +139,11 @@ namespace SimpleUtilities
             {
                 if (isTails)
                 {
-                    player.ReceiveHint(SimpleUtilities.Singleton.Config.CoinTails);
+                    player.ReceiveHint(SimpleUtilities.Singleton.Config.CoinTails, 1.5f);
                 }
                 else
                 {
-                    player.ReceiveHint(SimpleUtilities.Singleton.Config.CoinHeads);
+                    player.ReceiveHint(SimpleUtilities.Singleton.Config.CoinHeads, 1.5f);
                 }
             });
         }
@@ -157,18 +153,17 @@ namespace SimpleUtilities
         public void InitialHealth(Player plr, PlayerRoleBase oldRole, RoleTypeId newRole, RoleChangeReason reason)
         {
             if (!SimpleUtilities.Singleton.Config.ShowHp)
-            {
                 return;
-            }
 
             if (newRole == RoleTypeId.Spectator || newRole == RoleTypeId.None)
-            {
                 return;
-            }
 
             Timing.CallDelayed(0.1f, () =>
             {
-                plr.CustomInfo = $"HP: {(int)Math.Ceiling(plr.Health)}/{(int)plr.MaxHealth}";
+                string customInfo = hpFormat
+                .Replace("%current%", ((int)Math.Ceiling(plr.Health)).ToString())
+                .Replace("%max%", ((int)Math.Ceiling(plr.MaxHealth)).ToString());
+                plr.CustomInfo = customInfo;
             });
         }
 
@@ -176,18 +171,17 @@ namespace SimpleUtilities
         public void DamagedHealth(Player plr, Player target, DamageHandlerBase damageHandler)
         {
             if (!SimpleUtilities.Singleton.Config.ShowHp)
-            {
                 return;
-            }
 
             if (target.Role == RoleTypeId.Spectator || target.Role == RoleTypeId.None)
-            {
                 return;
-            }
 
             Timing.CallDelayed(0.5f, () =>
             {
-                target.CustomInfo = $"HP: {(int)Math.Ceiling(target.Health)}/{(int)target.MaxHealth}";
+                string customInfo = hpFormat
+                .Replace("%current%", ((int)Math.Ceiling(target.Health)).ToString())
+                .Replace("%max%", ((int)Math.Ceiling(target.MaxHealth)).ToString());
+                target.CustomInfo = customInfo;
             });
         }
 
@@ -195,6 +189,7 @@ namespace SimpleUtilities
         [HarmonyPatch(typeof(HealthStat), "ServerHeal")] //Thanks davidsebesta for the patch!
         public class HealedHealthPatch
         {
+            private static string hpFormat = SimpleUtilities.Singleton.Config.HpDisplayFormat;
             private static float lastUpdate;
             private const float UpdateDelay = 0.75f;
             //When using items that grant regeneration
@@ -205,22 +200,21 @@ namespace SimpleUtilities
             {
 
                 if (!SimpleUtilities.Singleton.Config.ShowHp)
-                {
                     return;
-                }
 
                 ReferenceHub refHub = GetHub(__instance);
                 if (refHub == null)
-                {
                     return;
-                }
 
                 Player plr = Player.Get(refHub.gameObject);
 
                 if (Time.time - lastUpdate > UpdateDelay)
                 {
                     lastUpdate = Time.time;
-                    plr.CustomInfo = $"HP: {(int)Math.Ceiling(plr.Health)}/{(int)plr.MaxHealth}";
+                    string customInfo = hpFormat
+                    .Replace("%current%", ((int)Math.Ceiling(plr.Health)).ToString())
+                    .Replace("%max%", ((int)Math.Ceiling(plr.MaxHealth)).ToString());
+                    plr.CustomInfo = customInfo;
                 }
             }
 

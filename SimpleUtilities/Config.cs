@@ -37,13 +37,16 @@ namespace SimpleUtilities
         [Description("Message sent for the player who looked at / shot SCP-096. (Leave it empty to disable.)")]
         public string TargetMessage { get; set; } = "you became a target for scp-096!";
 
-        [Description("Message sent when coin lands on tails.")]
+        [Description("Message sent when coin lands on tails. (Leave it empty to disable.)")]
         public string CoinTails { get; set; } = "the coin landed on tails!";
 
-        [Description("Message sent when coin lands on heads.")]
+        [Description("Message sent when coin lands on heads. (Leave it empty to disable.)")]
         public string CoinHeads { get; set; } = "the coin landed on heads!";
 
         [Description("Whether or not to show players' HP when looking at them.")]
         public bool ShowHp { get; set; } = true;
+
+        [Description("Format of displayed HP. Keep everything between ' '.")]
+        public string HpDisplayFormat { get; set; } = "HP: %current%/%max%";
     }
 }

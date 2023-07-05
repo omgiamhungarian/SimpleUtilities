@@ -13,14 +13,12 @@ namespace SimpleUtilities
         public Config Config;
 
         [PluginPriority(LoadPriority.Highest)]
-        [PluginEntryPoint("SimpleUtilities", "1.1.2", "Provides simple features for your server.", "omgiamhungarian")]
+        [PluginEntryPoint("SimpleUtilities", "1.1.3", "Provides simple features for your server.", "omgiamhungarian")]
 
         public void LoadPlugin()
         {
             if (!Config.IsEnabled)
-            {
                 return;
-            }
 
             Singleton = this;
             EventManager.RegisterEvents(this);

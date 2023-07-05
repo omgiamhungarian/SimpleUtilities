@@ -43,15 +43,17 @@ cassie_text: true
 # Chance (1-100) for Chaos Insurgency to spawn at round start instead of Facility Guards.
 chaos_chance: 25
 # Whether or not to enable friendly fire when the round ends. (You can change the friendly_fire_multiplier in your config_gameplay.txt)
-f_f_on_end: true
+ff_on_end: true
 # Whether or not disarmed NTF / CI should change teams when escaping.
 cuffed_change_teams: true
 # Message sent for the player who looked at / shot SCP-096. (Leave it empty to disable.)
 target_message: you became a target for scp-096!
-# Message sent when coin lands on tails.
+# Message sent when coin lands on tails. (Leave it empty to disable.)
 coin_tails: the coin landed on tails!
-# Message sent when coin lands on heads.
+# Message sent when coin lands on heads. (Leave it empty to disable.)
 coin_heads: the coin landed on heads!
 # Whether or not to show players' HP when looking at them.
 show_hp: true
+# Format of displayed HP. Keep everything between ' '.
+hp_display_format: 'HP: %current%/%max%'
 ```
